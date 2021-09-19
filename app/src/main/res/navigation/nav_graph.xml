@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/allCompetitionsFragment"
-        android:name="com.bignerdranch.android.footballcompetitions.AllCompetitionsFragment"
+        android:name="com.bignerdranch.android.footballcompetitions.ui.competitions.AllCompetitionsFragment"
         android:label="AllCompetitionsFragment" />
 </navigation>

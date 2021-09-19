@@ -1,4 +1,4 @@
-package com.bignerdranch.android.footballcompetitions
+package com.bignerdranch.android.footballcompetitions.ui.competitions
 
 import android.os.Bundle
 import android.util.Log
@@ -7,14 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bignerdranch.android.footballcompetitions.R
 import com.bignerdranch.android.footballcompetitions.data.remote.api.Repository
+import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.Competition
 import com.bignerdranch.android.footballcompetitions.viewmodel.competitions.AllCompetitionsViewModel
 import com.bignerdranch.android.footballcompetitions.viewmodel.competitions.AllCompetitionsViewModelFactory
 
 class AllCompetitionsFragment : Fragment() {
 
-     private lateinit var allCompetitionsViewModel: AllCompetitionsViewModel
+    private lateinit var allCompetitionsViewModel: AllCompetitionsViewModel
+    private lateinit var competitionRecyclerView: RecyclerView
+    private var adapter: AllCompetitionsAdapter? = AllCompetitionsAdapter((emptyList()))
 
 
     override fun onCreateView(
@@ -23,6 +28,9 @@ class AllCompetitionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_all_competitions, container, false)
+        competitionRecyclerView = view.findViewById(R.id.recyclerView_allCompetitions)
+        competitionRecyclerView.adapter = adapter
+        competitionRecyclerView.layoutManager = LinearLayoutManager(context)
         return view
     }
 
@@ -30,9 +38,25 @@ class AllCompetitionsFragment : Fragment() {
         val repository = Repository()
         val viewModelFactory = AllCompetitionsViewModelFactory(repository)
         allCompetitionsViewModel = ViewModelProvider(this, viewModelFactory).get(
-            AllCompetitionsViewModel::class.java)
+            AllCompetitionsViewModel::class.java
+        )
 
         allCompetitionsViewModel.getCompetitions()
+
+        allCompetitionsViewModel.competitionsResponse.observe(
+            viewLifecycleOwner,
+            { response ->
+                if (response.isSuccessful) {
+                    response.body()?.competitions?.let { updateUI(it)}
+                } else {
+                    Log.d("TAG", response.errorBody().toString())
+                }
+            })
+    }
+
+    private fun updateUI(competitions : List<Competition>) {
+        adapter = AllCompetitionsAdapter(competitions)
+        competitionRecyclerView.adapter = adapter
 
     }
 
