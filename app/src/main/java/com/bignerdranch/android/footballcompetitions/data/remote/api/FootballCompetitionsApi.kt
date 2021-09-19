@@ -1,7 +1,6 @@
-package com.bignerdranch.android.footballcompetitions.api
+package com.bignerdranch.android.footballcompetitions.data.remote.api
 
-import com.bignerdranch.android.footballcompetitions.model.competition.Competition
-import com.bignerdranch.android.footballcompetitions.model.competition.MainCompetition
+import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.MainCompetition
 import retrofit2.Response
 import retrofit2.http.GET
 

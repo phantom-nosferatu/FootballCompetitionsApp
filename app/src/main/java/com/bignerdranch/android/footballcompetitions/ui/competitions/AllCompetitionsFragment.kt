@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.footballcompetitions.data.remote.api.Repository
+import com.bignerdranch.android.footballcompetitions.viewmodel.competitions.AllCompetitionsViewModel
+import com.bignerdranch.android.footballcompetitions.viewmodel.competitions.AllCompetitionsViewModelFactory
 
 class AllCompetitionsFragment : Fragment() {
 
@@ -27,22 +29,11 @@ class AllCompetitionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val repository = Repository()
         val viewModelFactory = AllCompetitionsViewModelFactory(repository)
-        allCompetitionsViewModel = ViewModelProvider(this, viewModelFactory).get(AllCompetitionsViewModel::class.java)
+        allCompetitionsViewModel = ViewModelProvider(this, viewModelFactory).get(
+            AllCompetitionsViewModel::class.java)
 
         allCompetitionsViewModel.getCompetitions()
 
-        allCompetitionsViewModel.competitionsResponse.observe(viewLifecycleOwner, {
-            response ->
-            if (response.isSuccessful) {
-
-            } else {
-                Log.d("TAG", response.errorBody().toString())
-            }
-        })
     }
-
-}
-
-private class AllCompetitionsHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 }

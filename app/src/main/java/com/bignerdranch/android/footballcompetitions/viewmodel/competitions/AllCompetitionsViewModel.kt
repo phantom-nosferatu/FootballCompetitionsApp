@@ -1,10 +1,10 @@
-package com.bignerdranch.android.footballcompetitions
+package com.bignerdranch.android.footballcompetitions.viewmodel.competitions
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bignerdranch.android.footballcompetitions.data.remote.api.Repository
-import com.bignerdranch.android.footballcompetitions.model.competition.MainCompetition
+import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.MainCompetition
 import kotlinx.coroutines.launch
 import retrofit2.Response
 

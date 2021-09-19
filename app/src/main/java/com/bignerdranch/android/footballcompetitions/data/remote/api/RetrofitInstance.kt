@@ -1,4 +1,4 @@
-package com.bignerdranch.android.footballcompetitions.api
+package com.bignerdranch.android.footballcompetitions.data.remote.api
 
 import com.bignerdranch.android.footballcompetitions.utils.Constants.Companion.BASE_URL
 import retrofit2.Retrofit

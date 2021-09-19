@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FootballCompetitions</string>
+    <string name="str_competitionName">Competition name</string>
 </resources>
