@@ -3,6 +3,7 @@ package com.bignerdranch.android.footballcompetitions.ui.competitions
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.footballcompetitions.R
@@ -16,6 +17,10 @@ class AllCompetitionsAdapter(val competitions : List<Competition> ) :
    inner class AllCompetitionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameCompetition: TextView = itemView.findViewById(R.id.text_competitionName)
 
+       fun bind(competition : Competition ) {
+           nameCompetition.text = competition.name
+       }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllCompetitionsViewHolder {
@@ -26,8 +31,10 @@ class AllCompetitionsAdapter(val competitions : List<Competition> ) :
 
     override fun onBindViewHolder(holder: AllCompetitionsViewHolder, position: Int) {
         val competition = competitions[position]
-        holder.nameCompetition.text = competition.name
+        holder.bind(competition)
+
     }
 
     override fun getItemCount() = competitions.size
 }
+
