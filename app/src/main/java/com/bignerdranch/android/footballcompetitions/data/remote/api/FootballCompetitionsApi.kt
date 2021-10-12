@@ -8,4 +8,6 @@ interface FootballCompetitionsApi {
 
     @GET("v2/competitions")
     suspend fun getCompetitions() : Response<MainCompetition>
+
+
 }
