@@ -17,10 +17,6 @@ class AllCompetitionsAdapter(val competitions : List<Competition> ) :
    inner class AllCompetitionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameCompetition: TextView = itemView.findViewById(R.id.text_competitionName)
 
-       fun bind(competition : Competition ) {
-           nameCompetition.text = competition.name
-       }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllCompetitionsViewHolder {
@@ -31,7 +27,7 @@ class AllCompetitionsAdapter(val competitions : List<Competition> ) :
 
     override fun onBindViewHolder(holder: AllCompetitionsViewHolder, position: Int) {
         val competition = competitions[position]
-        holder.bind(competition)
+        holder.nameCompetition.text = competition.name
 
     }
 

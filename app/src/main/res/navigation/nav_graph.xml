@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/allCompetitionsFragment"
         android:name="com.bignerdranch.android.footballcompetitions.ui.competitions.AllCompetitionsFragment"
-        android:label="AllCompetitionsFragment" />
+        android:label="AllCompetitionsFragment" >
+        <action
+            android:id="@+id/action_allCompetitionsFragment_to_tableFragment"
+            app:destination="@id/tableFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tableFragment"
+        android:name="com.bignerdranch.android.footballcompetitions.ui.table.TableFragment"
+        android:label="TableFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>
