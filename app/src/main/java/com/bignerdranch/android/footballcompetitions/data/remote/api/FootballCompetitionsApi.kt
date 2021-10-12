@@ -16,6 +16,6 @@ interface FootballCompetitionsApi {
     suspend fun getCompetitions(): Response<CompetitionResponse>
 
     @Headers("X-Auth-Token: $API_TOKEN")
-    @GET("/v2/competitions/{id}/standings")
+    @GET("v2/competitions/{id}/standings")
     suspend fun getTables(@Path("id") id: Int): Response<TableResponse>
 }
