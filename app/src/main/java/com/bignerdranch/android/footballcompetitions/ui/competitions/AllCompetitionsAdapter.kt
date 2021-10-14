@@ -3,19 +3,30 @@ package com.bignerdranch.android.footballcompetitions.ui.competitions
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.footballcompetitions.R
 import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.Competition
 
-class AllCompetitionsAdapter(val competitions : List<Competition> ) :
+class AllCompetitionsAdapter(val competitions: List<Competition>) :
     RecyclerView.Adapter<AllCompetitionsAdapter.AllCompetitionsViewHolder>() {
 
+    inner class AllCompetitionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-
-   inner class AllCompetitionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameCompetition: TextView = itemView.findViewById(R.id.text_competitionName)
+
+        fun bind(competition: Competition) {
+            nameCompetition.text = competition.name
+
+            itemView.setOnClickListener {
+                val action =
+                    AllCompetitionsFragmentDirections.actionAllCompetitionsFragmentToTableFragment(
+                        competition.id
+                    )
+                Navigation.findNavController(itemView).navigate(action)
+            }
+        }
 
     }
 
@@ -27,10 +38,11 @@ class AllCompetitionsAdapter(val competitions : List<Competition> ) :
 
     override fun onBindViewHolder(holder: AllCompetitionsViewHolder, position: Int) {
         val competition = competitions[position]
-        holder.nameCompetition.text = competition.name
+        holder.bind(competition)
 
     }
 
     override fun getItemCount() = competitions.size
 }
+
 

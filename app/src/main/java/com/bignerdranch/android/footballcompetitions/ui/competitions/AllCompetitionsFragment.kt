@@ -25,7 +25,7 @@ class AllCompetitionsFragment : Fragment() {
     private lateinit var competitionRecyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var loadingText : TextView
-    private var adapter: AllCompetitionsAdapter? = AllCompetitionsAdapter((emptyList()))
+    private var adapter: AllCompetitionsAdapter? = AllCompetitionsAdapter(emptyList())
 
 
     override fun onCreateView(
