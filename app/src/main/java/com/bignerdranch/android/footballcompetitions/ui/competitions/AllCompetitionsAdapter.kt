@@ -16,18 +16,6 @@ class AllCompetitionsAdapter(val competitions: List<Competition>) :
 
         val nameCompetition: TextView = itemView.findViewById(R.id.text_competitionName)
 
-        fun bind(competition: Competition) {
-            nameCompetition.text = competition.name
-
-            itemView.setOnClickListener {
-                val action =
-                    AllCompetitionsFragmentDirections.actionAllCompetitionsFragmentToTableFragment(
-                        competition.id
-                    )
-                Navigation.findNavController(itemView).navigate(action)
-            }
-        }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllCompetitionsViewHolder {
@@ -38,7 +26,14 @@ class AllCompetitionsAdapter(val competitions: List<Competition>) :
 
     override fun onBindViewHolder(holder: AllCompetitionsViewHolder, position: Int) {
         val competition = competitions[position]
-        holder.bind(competition)
+        holder.nameCompetition.text = competition.name
+        holder.itemView.setOnClickListener {
+            val action =
+                AllCompetitionsFragmentDirections.actionAllCompetitionsFragmentToTableFragment(
+                    competition.id
+                )
+            Navigation.findNavController(holder.itemView).navigate(action)
+        }
 
     }
 
