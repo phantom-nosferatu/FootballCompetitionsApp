@@ -18,6 +18,7 @@ import com.bignerdranch.android.footballcompetitions.data.remote.api.Repository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.Competition
 import com.bignerdranch.android.footballcompetitions.viewmodel.competitions.AllCompetitionsViewModel
 import com.bignerdranch.android.footballcompetitions.viewmodel.competitions.AllCompetitionsViewModelFactory
+import java.util.Collections.emptyList
 
 class AllCompetitionsFragment : Fragment() {
 
@@ -55,14 +56,15 @@ class AllCompetitionsFragment : Fragment() {
             viewLifecycleOwner,
             { response ->
                 if (response.isSuccessful) {
-                    response.body()?.competitions?.let { updateUI(it)}
+                    val result = response.body()?.competitions
+                    updateUI(result!!)
                 } else {
                     Log.d("TAG", response.errorBody().toString())
                 }
             })
     }
 
-    private fun updateUI(competitions : List<Competition>) {
+    private fun updateUI(competitions: List<Competition>) {
         adapter = AllCompetitionsAdapter(competitions)
         competitionRecyclerView.adapter = adapter
         loadingText.visibility = GONE

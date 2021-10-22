@@ -37,7 +37,7 @@ class AllCompetitionsAdapter(val competitions: List<Competition>) :
 
     }
 
-    override fun getItemCount() = competitions.size
+    override fun getItemCount()= competitions.size
 }
 
 
