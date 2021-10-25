@@ -11,6 +11,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.footballcompetitions.R
@@ -40,6 +41,7 @@ class AllCompetitionsFragment : Fragment() {
         loadingText = view.findViewById(R.id.loadTextView)
         competitionRecyclerView.adapter = adapter
         competitionRecyclerView.layoutManager = LinearLayoutManager(context)
+        competitionRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         return view
     }
 

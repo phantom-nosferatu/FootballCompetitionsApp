@@ -16,8 +16,5 @@
         android:id="@+id/tableFragment"
         android:name="com.bignerdranch.android.footballcompetitions.ui.table.TableFragment"
         android:label="TableFragment" >
-        <argument
-            android:name="id"
-            app:argType="integer" />
     </fragment>
 </navigation>

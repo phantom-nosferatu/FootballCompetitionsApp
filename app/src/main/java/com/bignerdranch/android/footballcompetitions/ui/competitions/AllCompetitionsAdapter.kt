@@ -1,5 +1,6 @@
 package com.bignerdranch.android.footballcompetitions.ui.competitions
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,12 +28,11 @@ class AllCompetitionsAdapter(val competitions: List<Competition>) :
     override fun onBindViewHolder(holder: AllCompetitionsViewHolder, position: Int) {
         val competition = competitions[position]
         holder.nameCompetition.text = competition.name
-        holder.itemView.setOnClickListener {
-            val action =
-                AllCompetitionsFragmentDirections.actionAllCompetitionsFragmentToTableFragment(
-                    competition.id
-                )
-            Navigation.findNavController(holder.itemView).navigate(action)
+
+     holder.itemView.setOnClickListener {
+         val bundle = Bundle()
+         bundle.putInt("id", competition.id)
+            Navigation.findNavController(holder.itemView).navigate(R.id.action_allCompetitionsFragment_to_tableFragment, bundle)
         }
 
     }
