@@ -7,14 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.footballcompetitions.R
 import com.bignerdranch.android.footballcompetitions.data.remote.api.Repository
 import com.bignerdranch.android.footballcompetitions.viewmodel.table.TableViewModel
 import com.bignerdranch.android.footballcompetitions.viewmodel.table.TableViewModelFactory
+import java.util.Collections.emptyList
 
 class TableFragment : Fragment() {
 
     private lateinit var tableViewModel : TableViewModel
+    private lateinit var tableRecyclerView : RecyclerView
+    private var adapter: TableAdapter? = TableAdapter(emptyList())
 
 
     override fun onCreateView(
@@ -22,7 +28,12 @@ class TableFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_table, container, false)
+        val view = inflater.inflate(R.layout.fragment_table, container, false)
+        tableRecyclerView = view.findViewById(R.id.recyclerView_table)
+        tableRecyclerView.adapter = adapter
+        tableRecyclerView.layoutManager = LinearLayoutManager(context)
+        tableRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+        return view
     }
 
 
@@ -30,8 +41,8 @@ class TableFragment : Fragment() {
         val repository = Repository()
         val viewModelFactory = TableViewModelFactory(repository)
         tableViewModel = ViewModelProvider(this, viewModelFactory).get(TableViewModel::class.java)
-        val mId = arguments?.getInt("id")
+        val id = arguments?.getInt("id")
 
-        Log.e("TAG", "Competition id is $mId")
+        ///tableViewModel.
     }
 }

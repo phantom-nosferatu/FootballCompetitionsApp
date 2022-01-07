@@ -13,7 +13,6 @@ class AllCompetitionsViewModel(private val repository: Repository) : ViewModel()
     val competitionsResponse: MutableLiveData<Response<CompetitionResponse>> = MutableLiveData()
 
     fun getCompetitions() {
-
         viewModelScope.launch {
             val response = repository.getCompetitions()
             competitionsResponse.value = response
