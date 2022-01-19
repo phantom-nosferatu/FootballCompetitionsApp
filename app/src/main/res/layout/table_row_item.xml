@@ -3,25 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
+
+    <TextView
+        android:id="@+id/text_positionClub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11."
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_logoClub"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/text_nameClub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="TextView"
+        android:layout_marginStart="4dp"
+        android:text="Man City"
         app:layout_constraintBottom_toBottomOf="@+id/image_logoClub"
         app:layout_constraintStart_toEndOf="@+id/image_logoClub"
         app:layout_constraintTop_toTopOf="@+id/image_logoClub" />
 
-    <ImageView
-        android:id="@+id/image_logoClub"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+    <TextView
+        android:id="@+id/text_pointClub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="12"
+        app:layout_constraintBottom_toBottomOf="@+id/text_nameClub"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_nameClub" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

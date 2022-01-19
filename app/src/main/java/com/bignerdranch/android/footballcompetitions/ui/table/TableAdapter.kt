@@ -17,6 +17,8 @@ class TableAdapter(val tables: List<Table>) : RecyclerView.Adapter<TableAdapter.
 
         val logoClub: ImageView = itemView.findViewById(R.id.image_logoClub)
         val nameClub: TextView = itemView.findViewById(R.id.text_nameClub)
+        val positionClub : TextView = itemView.findViewById(R.id.text_positionClub)
+        val pointClub : TextView = itemView.findViewById(R.id.text_pointClub)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TableViewHolder {
@@ -27,7 +29,9 @@ class TableAdapter(val tables: List<Table>) : RecyclerView.Adapter<TableAdapter.
 
     override fun onBindViewHolder(holder: TableViewHolder, position: Int) {
         val table = tables[position]
-        holder.nameClub.text = "${table.position}. ${table.team.name}"
+        holder.nameClub.text = table.team.name
+        holder.positionClub.text = "${table.position}."
+        holder.pointClub.text = table.points.toString()
         val svgLoader = SVGLoader()
         svgLoader.loadImage(table.team.crestUrl, holder.itemView.context, holder.logoClub)
     }

@@ -12,14 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.footballcompetitions.R
 import com.bignerdranch.android.footballcompetitions.data.remote.api.Repository
+import com.bignerdranch.android.footballcompetitions.data.remote.model.table.Table
 import com.bignerdranch.android.footballcompetitions.viewmodel.table.TableViewModel
 import com.bignerdranch.android.footballcompetitions.viewmodel.table.TableViewModelFactory
 import java.util.Collections.emptyList
 
 class TableFragment : Fragment() {
 
-    private lateinit var tableViewModel : TableViewModel
-    private lateinit var tableRecyclerView : RecyclerView
+    private lateinit var tableViewModel: TableViewModel
+    private lateinit var tableRecyclerView: RecyclerView
     private var adapter: TableAdapter? = TableAdapter(emptyList())
 
 
@@ -32,7 +33,12 @@ class TableFragment : Fragment() {
         tableRecyclerView = view.findViewById(R.id.recyclerView_table)
         tableRecyclerView.adapter = adapter
         tableRecyclerView.layoutManager = LinearLayoutManager(context)
-        tableRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+        tableRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                LinearLayoutManager.VERTICAL
+            )
+        )
         return view
     }
 
@@ -43,6 +49,22 @@ class TableFragment : Fragment() {
         tableViewModel = ViewModelProvider(this, viewModelFactory).get(TableViewModel::class.java)
         val id = arguments?.getInt("id")
 
-        ///tableViewModel.
+        tableViewModel.getTables(id!!)
+
+        tableViewModel.tableResponse.observe(viewLifecycleOwner, {
+
+                response ->
+            if (response.isSuccessful) {
+                val result = response.body()?.standings?.flatMap { it.table }
+                UpdateUI(result!!)
+            } else {
+                Log.d("TAG",response.errorBody().toString())
+            }
+        })
+    }
+
+    private fun UpdateUI(table: List<Table>) {
+        adapter = TableAdapter(table)
+        tableRecyclerView.adapter = adapter
     }
 }
