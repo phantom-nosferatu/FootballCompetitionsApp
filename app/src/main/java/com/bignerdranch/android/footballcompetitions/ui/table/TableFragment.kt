@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -22,6 +23,8 @@ class TableFragment : Fragment() {
     private lateinit var tableViewModel: TableViewModel
     private lateinit var tableRecyclerView: RecyclerView
     private var adapter: TableAdapter? = TableAdapter(emptyList())
+    val name = arguments?.getString("name")
+
 
 
     override fun onCreateView(
@@ -29,6 +32,7 @@ class TableFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_table, container, false)
         tableRecyclerView = view.findViewById(R.id.recyclerView_table)
         tableRecyclerView.adapter = adapter
@@ -49,21 +53,24 @@ class TableFragment : Fragment() {
         tableViewModel = ViewModelProvider(this, viewModelFactory).get(TableViewModel::class.java)
         val id = arguments?.getInt("id")
 
+        getTable(id)
+    }
+
+    private fun getTable(id: Int?) {
         tableViewModel.getTables(id!!)
 
         tableViewModel.tableResponse.observe(viewLifecycleOwner, {
-
                 response ->
             if (response.isSuccessful) {
                 val result = response.body()?.standings?.flatMap { it.table }
-                UpdateUI(result!!)
+                updateUI(result!!)
             } else {
                 Log.d("TAG",response.errorBody().toString())
             }
         })
     }
 
-    private fun UpdateUI(table: List<Table>) {
+    private fun updateUI(table: List<Table>) {
         adapter = TableAdapter(table)
         tableRecyclerView.adapter = adapter
     }

@@ -32,6 +32,7 @@ class AllCompetitionsAdapter(val competitions: List<Competition>) :
      holder.itemView.setOnClickListener {
          val bundle = Bundle()
          bundle.putInt("id", competition.id)
+         bundle.putString("name" , competition.name)
             Navigation.findNavController(holder.itemView).navigate(R.id.action_allCompetitionsFragment_to_tableFragment, bundle)
         }
 
