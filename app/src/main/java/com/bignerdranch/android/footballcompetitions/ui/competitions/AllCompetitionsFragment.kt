@@ -17,8 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.footballcompetitions.R
 import com.bignerdranch.android.footballcompetitions.data.remote.api.Repository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.Competition
-import com.bignerdranch.android.footballcompetitions.viewmodel.competitions.AllCompetitionsViewModel
-import com.bignerdranch.android.footballcompetitions.viewmodel.competitions.AllCompetitionsViewModelFactory
 import java.util.Collections.emptyList
 
 class AllCompetitionsFragment : Fragment() {

@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -14,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.footballcompetitions.R
 import com.bignerdranch.android.footballcompetitions.data.remote.api.Repository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.table.Table
-import com.bignerdranch.android.footballcompetitions.viewmodel.table.TableViewModel
-import com.bignerdranch.android.footballcompetitions.viewmodel.table.TableViewModelFactory
 import java.util.Collections.emptyList
 
 class TableFragment : Fragment() {

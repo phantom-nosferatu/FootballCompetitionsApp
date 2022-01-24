@@ -1,4 +1,4 @@
-package com.bignerdranch.android.footballcompetitions.viewmodel.competitions
+package com.bignerdranch.android.footballcompetitions.ui.competitions
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
