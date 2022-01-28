@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/allCompetitionsFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/allCompetitionsFragment"
@@ -19,9 +19,8 @@
         android:label="@string/tableFragment_label" >
     </fragment>
     <fragment
-
         android:id="@+id/homeFragment"
         android:name="com.bignerdranch.android.footballcompetitions.ui.home.HomeFragment"
-        android:label="Home"
+        android:label="Главная"
         tools:layout="@layout/home_fragment" />
 </navigation>
