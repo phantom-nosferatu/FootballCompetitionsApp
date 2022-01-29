@@ -46,9 +46,7 @@ class AllCompetitionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val repository = Repository()
         val viewModelFactory = AllCompetitionsViewModelFactory(repository)
-        allCompetitionsViewModel = ViewModelProvider(this, viewModelFactory).get(
-            AllCompetitionsViewModel::class.java
-        )
+        allCompetitionsViewModel = ViewModelProvider(this, viewModelFactory)[AllCompetitionsViewModel::class.java]
 
         allCompetitionsViewModel.getCompetitions()
 
