@@ -3,6 +3,7 @@ package com.bignerdranch.android.footballcompetitions.data.remote.api
 import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.CompetitionResponse
 import com.bignerdranch.android.footballcompetitions.data.remote.model.matches.MatchesResponse
 import com.bignerdranch.android.footballcompetitions.data.remote.model.table.TableResponse
+import com.bignerdranch.android.footballcompetitions.data.remote.model.team.TeamResponse
 import com.bignerdranch.android.footballcompetitions.utils.Constants.Companion.API_TOKEN
 import retrofit2.Response
 import retrofit2.http.GET
@@ -23,4 +24,10 @@ interface FootballCompetitionsApi {
     @Headers("X-Auth-Token: $API_TOKEN")
     @GET("/v2/matches")
     suspend fun getMatches(): Response<MatchesResponse>
+
+    @Headers("X-Auth-Token: $API_TOKEN")
+    @GET("/v2/teams/{id}")
+    suspend fun getTeam(@Path("id") id: Int) : Response<TeamResponse>
+
+
 }

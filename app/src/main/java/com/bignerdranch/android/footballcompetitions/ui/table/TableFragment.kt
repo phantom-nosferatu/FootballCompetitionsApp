@@ -47,7 +47,7 @@ class TableFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val repository = Repository()
         val viewModelFactory = TableViewModelFactory(repository)
-        tableViewModel = ViewModelProvider(this, viewModelFactory).get(TableViewModel::class.java)
+        tableViewModel = ViewModelProvider(this, viewModelFactory)[TableViewModel::class.java]
         val id = arguments?.getInt("id")
 
         getTable(id)
