@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.bignerdranch.android.footballcompetitions.data.local.entity.CompetitionEntity
+import com.bignerdranch.android.footballcompetitions.data.local.entity.MatchesEntity
 
 
 @Dao
@@ -15,4 +16,7 @@ interface CompetitionDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveCompetitions(competition : List<CompetitionEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveMatches(match : List<MatchesEntity>)
 }

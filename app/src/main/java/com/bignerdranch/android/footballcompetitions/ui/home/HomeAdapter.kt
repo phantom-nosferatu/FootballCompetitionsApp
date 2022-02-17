@@ -15,7 +15,7 @@ class HomeAdapter(val matches : List<Match>) : RecyclerView.Adapter<HomeAdapter.
     val awayClub : TextView = itemView.findViewById(R.id.text_awayClub)
     val homeScore : TextView = itemView.findViewById(R.id.text_homeScore)
     val awayScore : TextView = itemView.findViewById(R.id.text_awayScore)
-    val duration : TextView = itemView.findViewById(R.id.text_duration)
+    val date : TextView = itemView.findViewById(R.id.text_duration)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
@@ -29,7 +29,7 @@ class HomeAdapter(val matches : List<Match>) : RecyclerView.Adapter<HomeAdapter.
         holder.awayClub.text = match.awayTeam.name
         holder.homeScore.text = match.score.fullTime.homeTeam.toString()
         holder.awayScore.text = match.score.fullTime.awayTeam.toString()
-        holder.duration.text = "${match.score.duration}'"
+        holder.date.text = match.utcDate
     }
 
     override fun getItemCount() = matches.size
