@@ -6,7 +6,7 @@ import com.bignerdranch.android.footballcompetitions.data.remote.model.table.Tab
 import com.bignerdranch.android.footballcompetitions.data.remote.model.team.TeamResponse
 import retrofit2.Response
 
-class Repository {
+class RemoteRepository {
 
     suspend fun getCompetitions() : Response<CompetitionResponse> {
         return RetrofitInstance.api.getCompetitions()

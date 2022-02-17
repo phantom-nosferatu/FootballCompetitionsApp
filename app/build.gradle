@@ -72,6 +72,14 @@ dependencies {
     implementation "io.coil-kt:coil:1.4.0"
     implementation "io.coil-kt:coil-svg:1.4.0"
 
+    //Room
+    def roomVersion = "2.4.1"
+
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+
 
 
 }

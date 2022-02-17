@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bignerdranch.android.footballcompetitions.R
-import com.bignerdranch.android.footballcompetitions.data.remote.api.Repository
+import com.bignerdranch.android.footballcompetitions.data.remote.api.RemoteRepository
 
 class TeamFragment : Fragment() {
 
@@ -24,7 +24,7 @@ private lateinit var viewModel: TeamViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repository = Repository()
+        val repository = RemoteRepository()
         val viewModelFactory = TeamViewModelFactory(repository)
        viewModel = ViewModelProvider(this, viewModelFactory)[TeamViewModel::class.java]
 

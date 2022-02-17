@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.footballcompetitions.R
-import com.bignerdranch.android.footballcompetitions.data.remote.api.Repository
+import com.bignerdranch.android.footballcompetitions.data.remote.api.RemoteRepository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.table.Table
 import java.util.Collections.emptyList
 
@@ -45,7 +45,7 @@ class TableFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val repository = Repository()
+        val repository = RemoteRepository()
         val viewModelFactory = TableViewModelFactory(repository)
         tableViewModel = ViewModelProvider(this, viewModelFactory)[TableViewModel::class.java]
         val id = arguments?.getInt("id")

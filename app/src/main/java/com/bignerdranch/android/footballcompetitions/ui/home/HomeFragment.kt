@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.footballcompetitions.R
-import com.bignerdranch.android.footballcompetitions.data.remote.api.Repository
+import com.bignerdranch.android.footballcompetitions.data.remote.api.RemoteRepository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.matches.Match
 
 class HomeFragment : Fragment() {
@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val repository = Repository()
+        val repository = RemoteRepository()
         val viewModelFactory = HomeViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
 
