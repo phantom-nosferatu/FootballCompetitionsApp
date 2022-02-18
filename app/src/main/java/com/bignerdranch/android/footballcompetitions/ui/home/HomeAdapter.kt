@@ -29,7 +29,7 @@ class HomeAdapter(val matches : List<Match>) : RecyclerView.Adapter<HomeAdapter.
         holder.awayClub.text = match.awayTeam.name
         holder.homeScore.text = match.score.fullTime.homeTeam.toString()
         holder.awayScore.text = match.score.fullTime.awayTeam.toString()
-        holder.date.text = match.utcDate
+        holder.date.text = match.utcDate.substring(11, 16)
     }
 
     override fun getItemCount() = matches.size

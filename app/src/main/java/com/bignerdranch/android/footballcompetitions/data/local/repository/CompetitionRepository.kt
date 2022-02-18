@@ -5,7 +5,11 @@ import com.bignerdranch.android.footballcompetitions.data.remote.model.competiti
 
 class CompetitionRepository(private val competitionDAO: CompetitionDAO) {
 
-    suspend fun saveCompetition(competition : List<Competition>) {
-        competitionDAO.saveCompetitions(competition.map {it.toCompetitionEntity()})
+    suspend fun saveCompetition(competition: List<Competition>) {
+        competitionDAO.saveCompetitions(competition.map { it.toCompetitionEntity() })
+    }
+
+    suspend fun getAllCompetition(): List<Competition> {
+        return competitionDAO.getAllCompetitions().map { it.toCompetition() }
     }
 }

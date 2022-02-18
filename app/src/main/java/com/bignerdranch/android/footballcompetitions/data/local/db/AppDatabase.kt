@@ -6,28 +6,29 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.bignerdranch.android.footballcompetitions.data.local.dao.CompetitionDAO
 import com.bignerdranch.android.footballcompetitions.data.local.entity.CompetitionEntity
+import com.bignerdranch.android.footballcompetitions.data.local.entity.MatchesEntity
 
-@Database(version = 1,
-    entities = [CompetitionEntity::class]
+@Database(
+    version = 1,
+    entities = [CompetitionEntity::class, MatchesEntity::class]
 )
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun competitionDao() : CompetitionDAO
+    abstract fun competitionDao(): CompetitionDAO
 
     companion object {
         @Volatile
-        private var INSTANCE : AppDatabase? = null
+        private var INSTANCE: AppDatabase? = null
 
-        fun getInstance(context: Context): AppDatabase {
-            synchronized(this) {
-                var instance = INSTANCE
-                if (instance == null) {
-                    instance = Room.databaseBuilder(context.applicationContext,
-                        AppDatabase::class.java, "db_competitions")
-                        .build()
-                    INSTANCE = instance
-                }
-                return instance
+        fun getInstance(context : Context): AppDatabase {
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "competition_db"
+                ).build()
+                INSTANCE = instance
+                instance
             }
         }
     }

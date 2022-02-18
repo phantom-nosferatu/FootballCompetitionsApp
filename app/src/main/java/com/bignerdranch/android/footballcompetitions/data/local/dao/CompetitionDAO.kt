@@ -11,12 +11,19 @@ import com.bignerdranch.android.footballcompetitions.data.local.entity.MatchesEn
 @Dao
 interface CompetitionDAO {
 
+    // Competitions
+
     @Query("SELECT * FROM competitions")
-    suspend fun getAllCompetitions() : List<CompetitionEntity>
+    suspend fun getAllCompetitions(): List<CompetitionEntity>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveCompetitions(competition : List<CompetitionEntity>)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun saveCompetitions(competition: List<CompetitionEntity>)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveMatches(match : List<MatchesEntity>)
+    // Matches
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun saveMatches(match: List<MatchesEntity>)
+
+    @Query("SELECT * FROM matches")
+    suspend fun getMatches() : List<MatchesEntity>
 }

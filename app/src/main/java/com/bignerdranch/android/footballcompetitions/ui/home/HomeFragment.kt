@@ -1,24 +1,31 @@
 package com.bignerdranch.android.footballcompetitions.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bignerdranch.android.footballcompetitions.App
 import com.bignerdranch.android.footballcompetitions.R
 import com.bignerdranch.android.footballcompetitions.data.remote.api.RemoteRepository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.matches.Match
+import com.bignerdranch.android.footballcompetitions.utils.NetworkConnection
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
-    private lateinit var viewModel: HomeViewModel
-    private lateinit var recyclerView : RecyclerView
+    private lateinit var recyclerView: RecyclerView
     private var adapter: HomeAdapter? = HomeAdapter(emptyList())
+    private val networkConnection = NetworkConnection()
+    private val viewModel: HomeViewModel by viewModels {
+        HomeViewModelFactory(RemoteRepository(), App().repository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,35 +33,46 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.home_fragment, container, false)
         recyclerView = view.findViewById(R.id.recyclerView_matches)
-       recyclerView.adapter = adapter
+        recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.addItemDecoration(DividerItemDecoration(context,LinearLayoutManager.VERTICAL))
+        recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val repository = RemoteRepository()
-        val viewModelFactory = HomeViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
 
-        viewModel.getMatches()
-
-        viewModel.matchesResponse.observe(viewLifecycleOwner, {
-            response ->
-            if (response.isSuccessful) {
-                val result = response.body()?.matches
-                updateUI(result!!)
-
-            } else {
-                Log.d("TAG", response.errorBody().toString())
-            }
-        })
+        when (networkConnection.internetIsActive(context)) {
+            true -> getRemoteMatches()
+            false -> getLocalMatches()
+        }
 
     }
 
-    private fun updateUI(match : List<Match>) {
+    private fun updateUI(match: List<Match>) {
         adapter = HomeAdapter(match)
         recyclerView.adapter = adapter
+    }
+
+    private fun getRemoteMatches() {
+        viewModel.getMatchesRemote()
+
+        viewModel.matchesResponse.observe(viewLifecycleOwner, { response ->
+            if (response.isSuccessful) {
+                val result = response.body()?.matches
+                viewModel.saveMatches(result!!)
+                updateUI(result)
+
+            } else {
+                getLocalMatches()
+            }
+        })
+    }
+
+    private fun getLocalMatches() {
+        CoroutineScope(Dispatchers.IO).launch() {
+            val query = viewModel.getMatchesLocal()
+            updateUI(query)
+        }
     }
 
 }
