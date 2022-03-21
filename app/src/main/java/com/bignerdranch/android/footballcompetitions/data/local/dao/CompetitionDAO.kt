@@ -16,12 +16,12 @@ interface CompetitionDAO {
     @Query("SELECT * FROM competitions")
     suspend fun getAllCompetitions(): List<CompetitionEntity>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveCompetitions(competition: List<CompetitionEntity>)
 
     // Matches
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveMatches(match: List<MatchesEntity>)
 
     @Query("SELECT * FROM matches")

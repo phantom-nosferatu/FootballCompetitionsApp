@@ -10,12 +10,12 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bignerdranch.android.footballcompetitions.App
 import com.bignerdranch.android.footballcompetitions.R
-import com.bignerdranch.android.footballcompetitions.data.local.db.AppDatabase
 import com.bignerdranch.android.footballcompetitions.data.remote.api.RemoteRepository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.Competition
 import com.bignerdranch.android.footballcompetitions.utils.NetworkConnection
@@ -23,12 +23,13 @@ import java.util.Collections.emptyList
 
 class AllCompetitionsFragment : Fragment() {
 
-    private lateinit var allCompetitionsViewModel: AllCompetitionsViewModel
     private lateinit var competitionRecyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var loadingText: TextView
-    private lateinit var db: AppDatabase
     private val networkConnection = NetworkConnection()
+    private val viewModel : AllCompetitionsViewModel by viewModels {
+        AllCompetitionsViewModelFactory(RemoteRepository(), App().competitionRepository)
+    }
     private var adapter: AllCompetitionsAdapter? = AllCompetitionsAdapter(emptyList())
 
 
@@ -53,25 +54,33 @@ class AllCompetitionsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val repository = RemoteRepository()
-        val viewModelFactory = AllCompetitionsViewModelFactory(repository)
 
-        allCompetitionsViewModel =
-            ViewModelProvider(this, viewModelFactory)[AllCompetitionsViewModel::class.java]
+        when(networkConnection.internetIsActive(context)) {
+            true -> getRemoteCompetitions()
+            false -> getLocalCompetitions()
 
-        allCompetitionsViewModel.getCompetitions()
+        }
 
-        allCompetitionsViewModel.competitionsResponse.observe(
-            viewLifecycleOwner,
-            { response ->
-                if (response.isSuccessful) {
-                    val result = response.body()?.competitions
-                    Log.d("TAG", "Database saved!!!")
-                    updateUI(result!!)
-                } else {
-                    Log.d("TAG", response.errorBody().toString())
-                }
-            })
+    }
+
+    private fun getLocalCompetitions() {
+        TODO()
+    }
+
+    private fun getRemoteCompetitions() {
+        viewModel.getCompetitions()
+
+        viewModel.competitionsResponse.observe(
+            viewLifecycleOwner
+        ) { response ->
+            if (response.isSuccessful) {
+                val result = response.body()?.competitions
+                Log.d("TAG", "Database saved!!!")
+                updateUI(result!!)
+            } else {
+                Log.d("TAG", response.errorBody().toString())
+            }
+        }
     }
 
     private fun updateUI(competitions: List<Competition>) {
