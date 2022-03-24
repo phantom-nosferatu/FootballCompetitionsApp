@@ -64,7 +64,11 @@ class AllCompetitionsFragment : Fragment() {
     }
 
     private fun getLocalCompetitions() {
-        TODO()
+        viewModel.getCompetitions()
+
+        viewModel.competitionsLocal.observe(viewLifecycleOwner) {
+            updateUI(it)
+        }
     }
 
     private fun getRemoteCompetitions() {
@@ -75,8 +79,8 @@ class AllCompetitionsFragment : Fragment() {
         ) { response ->
             if (response.isSuccessful) {
                 val result = response.body()?.competitions
-                Log.d("TAG", "Database saved!!!")
                 updateUI(result!!)
+                viewModel.saveCompetitions(result)
             } else {
                 Log.d("TAG", response.errorBody().toString())
             }
