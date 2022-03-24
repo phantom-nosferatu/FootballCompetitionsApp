@@ -56,8 +56,8 @@ class HomeFragment : Fragment() {
         viewModel.matchesResponse.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful) {
                 val result = response.body()?.matches
-                viewModel.saveMatches(result!!)
-                updateUI(result)
+                updateUI(result!!)
+                viewModel.saveMatches(result)
 
             } else {
                 getLocalMatches()

@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.bignerdranch.android.footballcompetitions.data.local.entity.CompetitionEntity
 import com.bignerdranch.android.footballcompetitions.data.local.entity.MatchesEntity
+import com.bignerdranch.android.footballcompetitions.data.local.entity.TablesEntity
 
 
 @Dao
@@ -26,4 +27,12 @@ interface CompetitionDAO {
 
     @Query("SELECT * FROM matches")
     suspend fun getMatches() : List<MatchesEntity>
+
+    // Tables
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveTables(table : List<TablesEntity>)
+
+    @Query("SELECT * FROM tables")
+    suspend fun getTables() : List<TablesEntity>
 }
