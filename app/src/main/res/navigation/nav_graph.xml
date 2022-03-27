@@ -17,10 +17,17 @@
         android:id="@+id/tableFragment"
         android:name="com.bignerdranch.android.footballcompetitions.ui.table.TableFragment"
         android:label="@string/tableFragment_label" >
+        <action
+            android:id="@+id/action_tableFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.bignerdranch.android.footballcompetitions.ui.home.HomeFragment"
         android:label="Главная"
         tools:layout="@layout/home_fragment" />
+    <fragment
+        android:id="@+id/teamFragment"
+        android:name="com.bignerdranch.android.footballcompetitions.ui.team.TeamFragment"
+        android:label="TeamFragment" />
 </navigation>

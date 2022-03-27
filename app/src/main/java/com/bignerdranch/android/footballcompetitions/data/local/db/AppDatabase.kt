@@ -7,10 +7,11 @@ import androidx.room.RoomDatabase
 import com.bignerdranch.android.footballcompetitions.data.local.dao.CompetitionDAO
 import com.bignerdranch.android.footballcompetitions.data.local.entity.CompetitionEntity
 import com.bignerdranch.android.footballcompetitions.data.local.entity.MatchesEntity
+import com.bignerdranch.android.footballcompetitions.data.local.entity.TablesEntity
 
 @Database(
     version = 1,
-    entities = [CompetitionEntity::class, MatchesEntity::class]
+    entities = [CompetitionEntity::class, MatchesEntity::class, TablesEntity::class]
 )
 abstract class AppDatabase : RoomDatabase() {
 

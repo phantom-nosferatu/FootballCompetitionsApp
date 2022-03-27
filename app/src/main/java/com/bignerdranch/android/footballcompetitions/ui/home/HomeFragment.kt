@@ -14,6 +14,9 @@ import com.bignerdranch.android.footballcompetitions.R
 import com.bignerdranch.android.footballcompetitions.data.remote.api.RemoteRepository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.matches.Match
 import com.bignerdranch.android.footballcompetitions.utils.NetworkConnection
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -21,7 +24,7 @@ class HomeFragment : Fragment() {
     private var adapter: HomeAdapter? = HomeAdapter(emptyList())
     private val networkConnection = NetworkConnection()
     private val viewModel: HomeViewModel by viewModels {
-        HomeViewModelFactory(RemoteRepository(), App().repository)
+        HomeViewModelFactory(RemoteRepository(), App().matchRepository)
     }
 
     override fun onCreateView(
@@ -46,8 +49,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateUI(match: List<Match>) {
-        adapter = HomeAdapter(match)
-        recyclerView.adapter = adapter
+        CoroutineScope(Dispatchers.Main).launch {
+            adapter = HomeAdapter(match)
+            recyclerView.adapter = adapter
+        }
     }
 
     private fun getRemoteMatches() {
@@ -56,8 +61,8 @@ class HomeFragment : Fragment() {
         viewModel.matchesResponse.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful) {
                 val result = response.body()?.matches
-                updateUI(result!!)
-                viewModel.saveMatches(result)
+                viewModel.saveMatches(result!!)
+                updateUI(result)
 
             } else {
                 getLocalMatches()

@@ -4,14 +4,19 @@ import android.app.Application
 import com.bignerdranch.android.footballcompetitions.data.local.db.AppDatabase
 import com.bignerdranch.android.footballcompetitions.data.local.repository.CompetitionRepository
 import com.bignerdranch.android.footballcompetitions.data.local.repository.MatchRepository
+import com.bignerdranch.android.footballcompetitions.data.local.repository.TableRepository
 
 class App : Application() {
 
-    val repository by lazy { MatchRepository(AppDatabase.getInstance(this).competitionDao()) }
+    val matchRepository by lazy { MatchRepository(AppDatabase.getInstance(this).competitionDao()) }
     val competitionRepository by lazy {
         CompetitionRepository(
             AppDatabase.getInstance(this).competitionDao()
         )
+    }
+
+    val tableRepository by lazy {
+        TableRepository(AppDatabase.getInstance(this).competitionDao())
     }
 
     override fun onCreate() {

@@ -19,6 +19,9 @@ import com.bignerdranch.android.footballcompetitions.R
 import com.bignerdranch.android.footballcompetitions.data.remote.api.RemoteRepository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.Competition
 import com.bignerdranch.android.footballcompetitions.utils.NetworkConnection
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.Collections.emptyList
 
 class AllCompetitionsFragment : Fragment() {
@@ -64,7 +67,7 @@ class AllCompetitionsFragment : Fragment() {
     }
 
     private fun getLocalCompetitions() {
-        viewModel.getCompetitions()
+        viewModel.getCompetitionsLocal()
 
         viewModel.competitionsLocal.observe(viewLifecycleOwner) {
             updateUI(it)
@@ -88,11 +91,13 @@ class AllCompetitionsFragment : Fragment() {
     }
 
     private fun updateUI(competitions: List<Competition>) {
-        adapter = AllCompetitionsAdapter(competitions)
-        competitionRecyclerView.adapter = adapter
-        loadingText.visibility = GONE
-        progressBar.visibility = GONE
-        competitionRecyclerView.visibility = VISIBLE
+        CoroutineScope(Dispatchers.Main).launch {
+            adapter = AllCompetitionsAdapter(competitions)
+            competitionRecyclerView.adapter = adapter
+            loadingText.visibility = GONE
+            progressBar.visibility = GONE
+            competitionRecyclerView.visibility = VISIBLE  }
+
 
     }
 

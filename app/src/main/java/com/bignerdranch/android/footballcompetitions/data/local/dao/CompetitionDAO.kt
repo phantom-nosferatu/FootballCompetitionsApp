@@ -33,6 +33,6 @@ interface CompetitionDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveTables(table : List<TablesEntity>)
 
-    @Query("SELECT * FROM tables")
-    suspend fun getTables() : List<TablesEntity>
+    @Query("SELECT * FROM tables WHERE compId LIKE :id ORDER BY position ASC")
+    suspend fun getTables(id : Int) : List<TablesEntity>
 }

@@ -6,21 +6,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bignerdranch.android.footballcompetitions.App
 import com.bignerdranch.android.footballcompetitions.R
 import com.bignerdranch.android.footballcompetitions.data.remote.api.RemoteRepository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.table.Table
+import com.bignerdranch.android.footballcompetitions.utils.NetworkConnection
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.Collections.emptyList
 
 class TableFragment : Fragment() {
-
-    private lateinit var tableViewModel: TableViewModel
     private lateinit var tableRecyclerView: RecyclerView
     private var adapter: TableAdapter? = TableAdapter(emptyList())
+    private val networkConnection = NetworkConnection()
     val name = arguments?.getString("name")
+
+    private val viewModel : TableViewModel by viewModels {
+        TableViewModelFactory(RemoteRepository(), App().tableRepository)
+    }
 
 
 
@@ -45,30 +53,42 @@ class TableFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val repository = RemoteRepository()
-        val viewModelFactory = TableViewModelFactory(repository)
-        tableViewModel = ViewModelProvider(this, viewModelFactory)[TableViewModel::class.java]
         val id = arguments?.getInt("id")
 
-        getTable(id)
+        when (networkConnection.internetIsActive(context)) {
+            true -> getRemoteTables(id!!)
+            false -> getLocalTables(id!!)
+        }
     }
 
-    private fun getTable(id: Int?) {
-        tableViewModel.getTables(id!!)
+    private fun getLocalTables(id : Int) {
+        viewModel.getTableLocal(id)
 
-        tableViewModel.tableResponse.observe(viewLifecycleOwner, {
-                response ->
+        viewModel.tableLocal.observe(viewLifecycleOwner) {
+            updateUI(it)
+        }
+    }
+
+    private fun getRemoteTables(id : Int) {
+        viewModel.getTables(id)
+
+        viewModel.tableResponse.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful) {
                 val result = response.body()?.standings?.flatMap { it.table }
                 updateUI(result!!)
+                viewModel.saveTable(id, result)
             } else {
-                Log.d("TAG",response.errorBody().toString())
+                Log.d("TAG", response.errorBody().toString())
             }
-        })
+        }
     }
 
+
     private fun updateUI(table: List<Table>) {
-        adapter = TableAdapter(table)
-        tableRecyclerView.adapter = adapter
+        CoroutineScope(Dispatchers.Main).launch {
+            adapter = TableAdapter(table)
+            tableRecyclerView.adapter = adapter
+        }
+
     }
 }
