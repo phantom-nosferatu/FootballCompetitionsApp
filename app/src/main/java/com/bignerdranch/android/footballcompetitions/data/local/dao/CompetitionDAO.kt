@@ -7,6 +7,7 @@ import androidx.room.Query
 import com.bignerdranch.android.footballcompetitions.data.local.entity.CompetitionEntity
 import com.bignerdranch.android.footballcompetitions.data.local.entity.MatchesEntity
 import com.bignerdranch.android.footballcompetitions.data.local.entity.TablesEntity
+import com.bignerdranch.android.footballcompetitions.data.local.entity.TeamEntity
 
 
 @Dao
@@ -35,4 +36,11 @@ interface CompetitionDAO {
 
     @Query("SELECT * FROM tables WHERE compId LIKE :id ORDER BY position ASC")
     suspend fun getTables(id : Int) : List<TablesEntity>
+
+    // Teams
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveTeam(team : List<TeamEntity>)
+
+    @Query("SELECT * FROM teams WHERE teamId LIKE :id ")
+    suspend fun getTeam(id : Int) : List<TeamEntity>
 }

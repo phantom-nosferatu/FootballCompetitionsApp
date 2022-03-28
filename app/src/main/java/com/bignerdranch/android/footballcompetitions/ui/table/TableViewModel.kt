@@ -26,7 +26,7 @@ class TableViewModel(
     }
 
     fun saveTable(id : Int, table: List<Table>) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             tableRepository.saveTable(id, table)
         }
     }

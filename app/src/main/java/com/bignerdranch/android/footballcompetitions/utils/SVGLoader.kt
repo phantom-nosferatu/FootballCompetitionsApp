@@ -8,7 +8,7 @@ import coil.request.ImageRequest
 
 class SVGLoader {
 
-    fun loadImage(url: String, context: Context, imageView: ImageView) {
+    fun loadImage(url: String?, context: Context, imageView: ImageView) {
 
         val imageLoader = ImageLoader.Builder(context)
             .componentRegistry { add(SvgDecoder(context)) }

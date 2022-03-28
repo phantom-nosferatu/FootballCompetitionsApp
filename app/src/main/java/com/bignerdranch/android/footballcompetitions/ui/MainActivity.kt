@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.main_toolbar)
-        val bottomNav : BottomNavigationView = findViewById(R.id.bottom_navigation)
+        val bottomNav: BottomNavigationView = findViewById(R.id.bottom_navigation)
         setSupportActionBar(toolbar)
 
         val navHostFragment =
@@ -27,9 +27,10 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, arg ->
             toolbar.title = when (destination.id) {
+                R.id.homeFragment -> "Matches"
                 R.id.tableFragment -> arg?.getString("name")
-                R.id.homeFragment ->"Главная"
-                R.id.allCompetitionsFragment -> "Список всех соревнований"
+                R.id.teamFragment -> "Squad ${arg?.getString("teamName")}"
+                R.id.allCompetitionsFragment -> "All Leagues"
                 else -> "All Competitions"
             }
         }

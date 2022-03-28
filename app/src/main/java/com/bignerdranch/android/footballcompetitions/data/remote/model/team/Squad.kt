@@ -1,11 +1,19 @@
 package com.bignerdranch.android.footballcompetitions.data.remote.model.team
 
+import com.bignerdranch.android.footballcompetitions.data.local.entity.TeamEntity
+
 data class Squad(
-    val countryOfBirth: String,
+    val id : Int,
     val dateOfBirth: String,
-    val id: Int,
     val name: String,
-    val nationality: String,
     val position: String,
-    val role: String
-)
+) {
+
+    fun toTeamEntity(_id : Int) : TeamEntity = TeamEntity(
+        teamId = _id,
+        playerId = id,
+        name = name,
+        position = position,
+        year = dateOfBirth
+    )
+}
