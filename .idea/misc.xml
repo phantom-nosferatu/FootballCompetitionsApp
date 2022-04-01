@@ -8,6 +8,38 @@
         <entry key="..\:/Users/acer/AndroidStudioProjects/FootballCompetitions/app/src/main/res/layout/match_row_item.xml" value="0.25" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/FootballCompetitions/app/src/main/res/layout/table_row_item.xml" value="0.33" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/FootballCompetitions/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.19074074074074074" />
+        <entry key="app/src/main/res/layout-hdpi/competition_row_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-hdpi/fragment_all_competitions.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-hdpi/match_row_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout-large/competition_row_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-large/fragment_all_competitions.xml" value="0.33" />
+        <entry key="app/src/main/res/layout-large/match_row_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-large/table_row_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-large/team_row_item.xml" value="0.18" />
+        <entry key="app/src/main/res/layout-medium/home_fragment.xml" value="0.1484375" />
+        <entry key="app/src/main/res/layout-medium/match_row_item.xml" value="0.1484375" />
+        <entry key="app/src/main/res/layout-normal/competition_row_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-normal/fragment_all_competitions.xml" value="0.5" />
+        <entry key="app/src/main/res/layout-normal/match_row_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layout-normal/table_row_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout-normal/team_row_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout-xhdpi/competition_row_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-xhdpi/fragment_all_competitions.xml" value="0.33" />
+        <entry key="app/src/main/res/layout-xhdpi/match_row_item.xml" value="0.2" />
+        <entry key="app/src/main/res/layout-xlarge/competition_row_item.xml" value="0.17" />
+        <entry key="app/src/main/res/layout-xlarge/fragment_all_competitions.xml" value="0.18" />
+        <entry key="app/src/main/res/layout-xlarge/match_row_item.xml" value="0.14" />
+        <entry key="app/src/main/res/layout-xlarge/table_row_item.xml" value="0.22" />
+        <entry key="app/src/main/res/layout-xlarge/team_row_item.xml" value="0.14" />
+        <entry key="app/src/main/res/layout-xxhdpi/competition_row_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout-xxhdpi/fragment_all_competitions.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout-xxhdpi/match_row_item.xml" value="0.2" />
+        <entry key="app/src/main/res/layout-xxxhdpi/competition_row_item.xml" value="0.22" />
+        <entry key="app/src/main/res/layout-xxxhdpi/fragment_all_competitions.xml" value="0.16" />
+        <entry key="app/src/main/res/layout-xxxhdpi/match_row_item.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/competition_row_item.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/fragment_all_competitions.xml" value="0.296875" />
         <entry key="app/src/main/res/layout/fragment_team.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/match_row_item.xml" value="0.1598731884057971" />

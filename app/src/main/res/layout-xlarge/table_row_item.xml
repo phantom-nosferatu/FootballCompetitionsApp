@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp">
+
+    <TextView
+        android:id="@+id/text_positionClub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11."
+        android:textSize="24sp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_logoClub"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/text_nameClub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textSize="24sp"
+        android:text="Man City"
+        app:layout_constraintBottom_toBottomOf="@+id/image_logoClub"
+        app:layout_constraintStart_toEndOf="@+id/image_logoClub"
+        app:layout_constraintTop_toTopOf="@+id/image_logoClub" />
+
+    <TextView
+        android:id="@+id/text_pointClub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:textSize="24sp"
+        android:text="12"
+        app:layout_constraintBottom_toBottomOf="@+id/text_nameClub"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_nameClub" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

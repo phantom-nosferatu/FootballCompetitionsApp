@@ -3,8 +3,7 @@ package com.bignerdranch.android.footballcompetitions.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bignerdranch.android.footballcompetitions.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -22,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
+        setupActionBarWithNavController(navController)
         bottomNav.setupWithNavController(navController)
 
 
