@@ -1,4 +1,4 @@
-+ Sinle-Activity
++ Single-Activity
 + ViewModel
 + LiveData
 + Retrofit2
