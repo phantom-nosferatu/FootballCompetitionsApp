@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.tableFragment -> arg?.getString("name")
                 R.id.teamFragment -> "Squad ${arg?.getString("teamName")}"
                 R.id.allCompetitionsFragment -> "All Leagues"
-                else -> "All Competitions"
+                else -> "Football Leagues"
             }
         }
 

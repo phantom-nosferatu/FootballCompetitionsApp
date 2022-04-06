@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FootballCompetitions</string>
+    <string name="app_name">Football Leagues</string>
     <string name="str_competitionName">Competition name</string>
     <string name="str_loading">Загрузка...</string>
     <string name="allCompetitionFragment_label">Список всех соревнований</string>
