@@ -1,3 +1,12 @@
+<h2> Football Leagues</h2>
+
+<img src="https://play-lh.googleusercontent.com/gLC3G_-9-KTuffr7Pi2Iyiropi8Ww5dikvFVuwYz-a3_MlHRKmx2JIuZXAmcFKaBW2Q=s180" width="90" height="90"><a href="https://play.google.com/store/apps/details?id=com.bignerdranch.android.footballcompetitions">
+    <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
+        alt="Загрузить в Google Play" height="80"/>
+</a> 
+
+<h6>Самые последние результаты футбольных матчей, таблицы соревнований, составы команд.</h6>
+
 + Single-Activity
 + ViewModel
 + LiveData
