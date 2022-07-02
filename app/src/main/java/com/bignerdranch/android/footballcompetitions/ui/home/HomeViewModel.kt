@@ -20,19 +20,19 @@ class HomeViewModel(
     val localResponse : MutableLiveData<List<Match>> = MutableLiveData()
 
     fun getMatchesRemote() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             matchesResponse.postValue(remoteRepository.getMatches())
         }
     }
 
     fun saveMatches(match: List<Match>) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             matchRepository.saveMatches(match)
         }
     }
 
       fun getMatchesLocal() {
-          viewModelScope.launch(Dispatchers.IO) {
+          viewModelScope.launch {
               localResponse.postValue(matchRepository.getMatches())
           }
       }

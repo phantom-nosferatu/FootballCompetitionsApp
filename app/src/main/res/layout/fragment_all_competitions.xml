@@ -27,7 +27,7 @@
         android:id="@+id/loadTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_marginTop="10dp"
         android:text="@string/str_loading"
         app:layout_constraintEnd_toEndOf="parent"

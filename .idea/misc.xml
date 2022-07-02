@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/layout-medium/match_row_item.xml" value="0.1484375" />
         <entry key="app/src/main/res/layout-normal/competition_row_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout-normal/fragment_all_competitions.xml" value="0.5" />
+        <entry key="app/src/main/res/layout-normal/home_fragment.xml" value="0.1092896174863388" />
         <entry key="app/src/main/res/layout-normal/match_row_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout-normal/table_row_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout-normal/team_row_item.xml" value="0.33" />
@@ -41,7 +42,7 @@
         <entry key="app/src/main/res/layout/competition_row_item.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/fragment_all_competitions.xml" value="0.296875" />
         <entry key="app/src/main/res/layout/fragment_team.xml" value="0.19791666666666666" />
-        <entry key="app/src/main/res/layout/home_fragment.xml" value="0.19791666666666666" />
+        <entry key="app/src/main/res/layout/home_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/match_row_item.xml" value="0.1598731884057971" />
         <entry key="app/src/main/res/layout/table_row_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/team_row_item.xml" value="0.33" />

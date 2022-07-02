@@ -19,9 +19,6 @@ import com.bignerdranch.android.footballcompetitions.R
 import com.bignerdranch.android.footballcompetitions.data.remote.api.RemoteRepository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.Competition
 import com.bignerdranch.android.footballcompetitions.utils.NetworkConnection
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.util.Collections.emptyList
 
 class AllCompetitionsFragment : Fragment() {
@@ -30,7 +27,7 @@ class AllCompetitionsFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var loadingText: TextView
     private val networkConnection = NetworkConnection()
-    private val viewModel : AllCompetitionsViewModel by viewModels {
+    private val viewModel: AllCompetitionsViewModel by viewModels {
         AllCompetitionsViewModelFactory(RemoteRepository(), App().competitionRepository)
     }
     private var adapter: AllCompetitionsAdapter? = AllCompetitionsAdapter(emptyList())
@@ -58,7 +55,8 @@ class AllCompetitionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        when(networkConnection.internetIsActive(context)) {
+        Log.d("CompetitionTAG", "OnNetworkConnection")
+        when (networkConnection.internetIsActive(context)) {
             true -> getRemoteCompetitions()
             false -> getLocalCompetitions()
 
@@ -75,15 +73,26 @@ class AllCompetitionsFragment : Fragment() {
     }
 
     private fun getRemoteCompetitions() {
+
         viewModel.getCompetitions()
 
+        Log.d("CompetitionTAG", "OnGetCompetitions")
         viewModel.competitionsResponse.observe(
             viewLifecycleOwner
         ) { response ->
             if (response.isSuccessful) {
+          //      val competitionsId = listOf("2021", "2016", "2015", "2019", "2003", "2001")
+                Log.d("CompetitionTAG", "OnResponseIsSuccessful")
                 val result = response.body()?.competitions
+                /*.filter {
+                    it.id == 2021 || it.id == 2016 || it.id == 2015 || it.id == 2019 || it.id == 2003 || it.id == 2001
+                }*/
+                Log.d("CompetitionTAG", "OnResult")
                 updateUI(result!!)
+                Log.d("CompetitionTAG", "OnUpdateUI")
                 viewModel.saveCompetitions(result)
+                Log.d("CompetitionTAG", "OnDatabaseSaved")
+
             } else {
                 Log.d("TAG", response.errorBody().toString())
             }
@@ -91,14 +100,11 @@ class AllCompetitionsFragment : Fragment() {
     }
 
     private fun updateUI(competitions: List<Competition>) {
-        CoroutineScope(Dispatchers.Main).launch {
-            adapter = AllCompetitionsAdapter(competitions)
-            competitionRecyclerView.adapter = adapter
-            loadingText.visibility = GONE
-            progressBar.visibility = GONE
-            competitionRecyclerView.visibility = VISIBLE  }
-
-
+        adapter = AllCompetitionsAdapter(competitions)
+        competitionRecyclerView.adapter = adapter
+        loadingText.visibility = GONE
+        progressBar.visibility = GONE
+        competitionRecyclerView.visibility = VISIBLE
     }
 
 }

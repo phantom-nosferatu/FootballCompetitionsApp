@@ -7,7 +7,6 @@ import com.bignerdranch.android.footballcompetitions.data.local.repository.Compe
 import com.bignerdranch.android.footballcompetitions.data.remote.api.RemoteRepository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.Competition
 import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.CompetitionResponse
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -17,19 +16,19 @@ class AllCompetitionsViewModel(private val remoteRepository: RemoteRepository , 
     val competitionsLocal : MutableLiveData<List<Competition>> = MutableLiveData()
 
     fun getCompetitions() {
-        viewModelScope.launch(Dispatchers.IO) {
-            competitionsResponse.postValue(remoteRepository.getCompetitions())
+        viewModelScope.launch {
+            competitionsResponse.value = remoteRepository.getCompetitions()
         }
     }
 
     fun saveCompetitions(competition : List<Competition>) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             competitionRepository.saveCompetition(competition)
         }
     }
 
     fun getCompetitionsLocal() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             competitionsLocal.postValue(competitionRepository.getAllCompetition())
         }
     }

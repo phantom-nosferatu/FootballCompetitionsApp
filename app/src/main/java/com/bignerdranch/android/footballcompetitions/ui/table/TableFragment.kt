@@ -55,6 +55,8 @@ class TableFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val id = arguments?.getInt("id")
 
+        Log.d("TAG", "League id: $id")
+
         when (networkConnection.internetIsActive(context)) {
             true -> getRemoteTables(id!!)
             false -> getLocalTables(id!!)
