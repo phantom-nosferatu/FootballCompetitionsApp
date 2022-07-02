@@ -1,11 +1,8 @@
 package com.bignerdranch.android.footballcompetitions.ui.competitions
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -17,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.footballcompetitions.App
 import com.bignerdranch.android.footballcompetitions.R
 import com.bignerdranch.android.footballcompetitions.data.remote.api.RemoteRepository
-import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.Competition
-import com.bignerdranch.android.footballcompetitions.utils.NetworkConnection
 import java.util.Collections.emptyList
 
 class AllCompetitionsFragment : Fragment() {
@@ -26,7 +21,6 @@ class AllCompetitionsFragment : Fragment() {
     private lateinit var competitionRecyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var loadingText: TextView
-    private val networkConnection = NetworkConnection()
     private val viewModel: AllCompetitionsViewModel by viewModels {
         AllCompetitionsViewModelFactory(RemoteRepository(), App().competitionRepository)
     }
@@ -40,8 +34,6 @@ class AllCompetitionsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_all_competitions, container, false)
         competitionRecyclerView = view.findViewById(R.id.recyclerView_allCompetitions)
-        progressBar = view.findViewById(R.id.loadProgressBar)
-        loadingText = view.findViewById(R.id.loadTextView)
         competitionRecyclerView.adapter = adapter
         competitionRecyclerView.layoutManager = LinearLayoutManager(context)
         competitionRecyclerView.addItemDecoration(
@@ -55,24 +47,9 @@ class AllCompetitionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        Log.d("CompetitionTAG", "OnNetworkConnection")
-        when (networkConnection.internetIsActive(context)) {
-            true -> getRemoteCompetitions()
-            false -> getLocalCompetitions()
 
-        }
 
-    }
-
-    private fun getLocalCompetitions() {
-        viewModel.getCompetitionsLocal()
-
-        viewModel.competitionsLocal.observe(viewLifecycleOwner) {
-            updateUI(it)
-        }
-    }
-
-    private fun getRemoteCompetitions() {
+   /* private fun getRemoteCompetitions() {
 
         viewModel.getCompetitions()
 
@@ -96,15 +73,7 @@ class AllCompetitionsFragment : Fragment() {
             } else {
                 Log.d("TAG", response.errorBody().toString())
             }
-        }
-    }
-
-    private fun updateUI(competitions: List<Competition>) {
-        adapter = AllCompetitionsAdapter(competitions)
-        competitionRecyclerView.adapter = adapter
-        loadingText.visibility = GONE
-        progressBar.visibility = GONE
-        competitionRecyclerView.visibility = VISIBLE
+        } */
     }
 
 }

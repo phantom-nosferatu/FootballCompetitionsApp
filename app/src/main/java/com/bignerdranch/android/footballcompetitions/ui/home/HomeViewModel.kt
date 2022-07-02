@@ -7,7 +7,9 @@ import com.bignerdranch.android.footballcompetitions.data.local.repository.Match
 import com.bignerdranch.android.footballcompetitions.data.remote.api.RemoteRepository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.matches.Match
 import com.bignerdranch.android.footballcompetitions.data.remote.model.matches.MatchesResponse
-import kotlinx.coroutines.Dispatchers
+import com.bignerdranch.android.footballcompetitions.utils.PendingProgress
+import com.bignerdranch.android.footballcompetitions.utils.Progress
+import com.bignerdranch.android.footballcompetitions.utils.SuccessProgress
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -16,12 +18,12 @@ class HomeViewModel(
     private val matchRepository: MatchRepository
 ) : ViewModel() {
 
-    val matchesResponse: MutableLiveData<Response<MatchesResponse>> = MutableLiveData()
+    val matchesResponse = MutableLiveProgress<Response<MatchesResponse>>(PendingProgress())
     val localResponse : MutableLiveData<List<Match>> = MutableLiveData()
 
     fun getMatchesRemote() {
         viewModelScope.launch {
-            matchesResponse.postValue(remoteRepository.getMatches())
+            matchesResponse.postValue(SuccessProgress(remoteRepository.getMatches()))
         }
     }
 
@@ -37,3 +39,5 @@ class HomeViewModel(
           }
       }
     }
+
+typealias MutableLiveProgress<T> = MutableLiveData<Progress<T>>

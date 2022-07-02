@@ -7,6 +7,7 @@ import com.bignerdranch.android.footballcompetitions.data.local.repository.Compe
 import com.bignerdranch.android.footballcompetitions.data.remote.api.RemoteRepository
 import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.Competition
 import com.bignerdranch.android.footballcompetitions.data.remote.model.competition.CompetitionResponse
+import com.bignerdranch.android.footballcompetitions.utils.Progress
 import kotlinx.coroutines.launch
 import retrofit2.Response
 

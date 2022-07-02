@@ -6,6 +6,12 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.bignerdranch.android.footballcompetitions.ui.home.HomeFragment"
+        android:label="Главная"
+        tools:layout="@layout/home_fragment" />
+
+    <fragment
         android:id="@+id/allCompetitionsFragment"
         android:name="com.bignerdranch.android.footballcompetitions.ui.competitions.AllCompetitionsFragment"
         android:label="@string/allCompetitionFragment_label" >
@@ -21,11 +27,6 @@
             android:id="@+id/action_tableFragment_to_teamFragment"
             app:destination="@id/teamFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.bignerdranch.android.footballcompetitions.ui.home.HomeFragment"
-        android:label="Главная"
-        tools:layout="@layout/home_fragment" />
     <fragment
         android:id="@+id/teamFragment"
         android:name="com.bignerdranch.android.footballcompetitions.ui.team.TeamFragment"
